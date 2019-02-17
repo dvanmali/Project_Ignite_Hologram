@@ -6,7 +6,7 @@ function preload() {
 
 function setup() {
   createCanvas(710, 200);
-//  song.loop();
+  song.loop();
 
   // create a new Amplitude analyzer
   analyzer = new p5.Amplitude();

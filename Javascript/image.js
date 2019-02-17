@@ -21,7 +21,7 @@ function draw() {
     noStroke();
     
     if (mouseIsPressed) {
-        c = color('rgb(255,0,0)');
+        c = color('rgb(255,100,0)');
         fill(c);
     }
     else {
