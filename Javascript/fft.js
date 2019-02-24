@@ -3,18 +3,18 @@ function preload(){
 }
 
 function setup(){
-  var cnv = createCanvas(100,100);
+  var cnv = createCanvas(1024,768);
   cnv.mouseClicked(togglePlay);
   fft = new p5.FFT();
   sound.amp(0.2);
 }
 
 function draw(){
-  background(0);
+  background(255,255,255);
 
   var spectrum = fft.analyze();
   noStroke();
-  fill(0,255,0); // spectrum is green
+  fill(0,0,128); // spectrum is green
   for (var i = 0; i< spectrum.length; i++){
     var x = map(i, 0, spectrum.length, 0, width);
     var h = -height + map(spectrum[i], 0, 255, height, 0);
