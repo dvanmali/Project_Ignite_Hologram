@@ -1,8 +1,16 @@
-function MyCircle(color,index) {
-  this.pos   = [ Math.random() * width,
-                 Math.random() * height ];
-  this.color = color;
+function MyCircle(index,spec) {
   this.index = index;
+  this.spec  = spec;
+
+  this.pos   = [ Math.random() * width,
+                 Math.random() * height
+               ];
+  // TODO make colors in relation to frequency on visible light spectrum
+  var x = index/spec;
+  this.color = [ 255*Math.exp(-Math.pow(x-0.5,2)*30),
+                 255*Math.exp(-Math.pow(x    ,2)*30),
+                 255*Math.exp(-Math.pow(x+0.5,2)*30),
+               ];
 }
 
 function preload(){
@@ -23,7 +31,7 @@ function setup(){
   // random circle posisions and colors
   circs = [];
   for(var i = 0; i < ld; i++)
-    circs.push(new MyCircle( i / ld , i ));
+    circs.push(new MyCircle( i , ld ));
 
   // set amplitude
   sound.amp(0.2);
@@ -38,8 +46,9 @@ function draw(){
   noStroke();
   for (c of circs) {
     var p = c.pos;
-    fill(0,0,128); // spectrum is green
-    //console.log(c.pos[0]+" "+c.pos[1]);
+    var f = c.color;
+
+    fill(f[0],f[1],f[2]);
     circle(p[0],p[1],spec[c.index])
   }
 
