@@ -7,10 +7,20 @@ function MyCircle(index,spec) {
                ];
   // TODO make colors in relation to frequency on visible light spectrum
   var x = index/spec;
-  this.color = [ 255*Math.exp(-Math.pow(x-0.5,2)*30),
-                 255*Math.exp(-Math.pow(x    ,2)*30),
-                 255*Math.exp(-Math.pow(x+0.5,2)*30),
+  this.color = [ 255*Math.exp(-Math.pow(x+0.5,2)),
+                 255*Math.exp(-Math.pow(x    ,2)),
+                 255*Math.exp(-Math.pow(x-0.5,2)),
                ];
+
+  this._lastF = 0.9
+  var setF = function() { this.lastF += Math.random()-0.5; };
+  this.getColor = function() {
+    setF();
+    var c = this.color;
+    return [ c[0]*this._lastF,
+             c[1]*this._lastF,
+             c[2]*this._lastF ];
+  };
 }
 
 function preload(){
@@ -23,7 +33,7 @@ function setup(){
   cnv.mouseClicked(togglePlay);
 
   // FFT's (low definition and high definition)
-  var ld = 16;
+  var ld = 32;
   var hd = 1024;
   fft_ld = new p5.FFT(0.8,ld);
   fft_hd = new p5.FFT(0.8,hd);
@@ -46,7 +56,7 @@ function draw(){
   noStroke();
   for (c of circs) {
     var p = c.pos;
-    var f = c.color;
+    var f = c.getColor();
 
     fill(f[0],f[1],f[2]);
     circle(p[0],p[1],spec[c.index])
