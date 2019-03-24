@@ -1,33 +1,27 @@
-function preload() {
-    mySound = loadSound('Audio/Italy_Jr.mp3');
-}
-
 function setup() {
-    createCanvas(400,400);
-    mySound.setVolume(1.0);
-    mySound.play();
+    createCanvas(600,600, WEBGL);
 }
-
-function mousedPressed() {
-    if (song.isPlaying()) {
-        song.stop();
-    }
-    else {
-        song.play();
-    }
-}
-
 function draw() {
-    noStroke();
+    background(500); {
+        rotateX(frameCount * 0.005);
+        rotateZ(frameCount * 0.005);
+        sphere(200,24,16);
+        let c = color (255,204,0);
+        fill(255,0,0,150);
+        
+        if (mouseIsPressed) { 
+            rotateX(frameCount * 0.003);
+            rotateZ(frameCount * 0.003);
+            sphere(255,24,16);
+            let c = color (255,204,0);
+            fill(255,0,0,150);
+        } else {           
+            rotateX(frameCount * 0.003);
+            rotateZ(frameCount * 0.003);
+            sphere(200,24,16);
+            let c = color (255,204,0);
+            fill(255,0,0,150);
     
-    if (mouseIsPressed) {
-        c = color('rgb(255,0,0)');
-        fill(c);
-    }
-    else {
-        c = color('rgb(0,255,100)');
-        fill(c);
-    }
-    
-    ellipse(mouseX, mouseY, 80, 80);
+        }
+        }
 }
